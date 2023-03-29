@@ -4,9 +4,9 @@ const Game = (() => {
     const block = e.target;
     if (playerTurn) {
       const player1Turn = document.createElement("p");
-      markX.textContent = "X";
-      markX.setAttribute("class", "player1");
-      block.appendChild(markX);
+      player1Turn.textContent = "X";
+      player1Turn.setAttribute("class", "player1");
+      block.appendChild(player1Turn);
       playerTurn = false;
     }
   };
