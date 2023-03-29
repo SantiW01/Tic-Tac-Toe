@@ -1,4 +1,5 @@
 const Game = (() => {
+  let playerTurn = true;
   const play = (e) => {
     const block = e.target;
     if (playerTurn) {
