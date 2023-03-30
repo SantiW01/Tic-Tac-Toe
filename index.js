@@ -1,29 +1,33 @@
 const Game = (() => {
   let playerTurn = true;
-  const play = (e) => {
+  const clickBlock = (e) => {
     const block = e.target;
     if (playerTurn) {
       const player1Turn = document.createElement("p");
       player1Turn.textContent = "X";
       player1Turn.setAttribute("class", "player1");
-      block.appendChild(player1Turn);
-      playerTurn = false;
+      if (!block.hasChildNodes()) {
+        block.appendChild(player1Turn);
+        playerTurn = false;
+      }
     } else if (!playerTurn) {
       const player2Turn = document.createElement("p");
       player2Turn.textContent = "O";
       player2Turn.setAttribute("class", "player2");
-      block.appendChild(player2Turn);
-      playerTurn = true;
+      if (!block.hasChildNodes()) {
+        block.appendChild(player2Turn);
+        playerTurn = true;
+      }
     }
   };
-  const clickBlock = () => {
+  const play = () => {
     let blockSelected = document.querySelectorAll(".main");
     blockSelected.forEach((block) => {
-      block.addEventListener("click", (e) => play(e));
+      block.addEventListener("click", (e) => clickBlock(e));
     });
   };
 
-  return { clickBlock };
+  return { play };
 })();
 
-Game.clickBlock();
+Game.play();
