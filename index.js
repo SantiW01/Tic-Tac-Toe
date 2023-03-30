@@ -27,7 +27,8 @@ const Game = (() => {
 
   const play = () => {
     let blockSelected = document.querySelectorAll(".main");
-    blockSelected.forEach((block) => {
+    blockSelected.forEach((block, i) => {
+      block.setAttribute("data-value", `${i + 1}`);
       block.addEventListener("click", (e) => clickBlock(e));
     });
   };
