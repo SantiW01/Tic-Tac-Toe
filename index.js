@@ -2,6 +2,10 @@ const Game = (() => {
   let playerTurn = true;
   const clickBlock = (e) => {
     const block = e.target;
+    changeTurn(block);
+  };
+
+  const changeTurn = (block) => {
     if (playerTurn) {
       const player1Turn = document.createElement("p");
       player1Turn.textContent = "X";
@@ -20,6 +24,7 @@ const Game = (() => {
       }
     }
   };
+
   const play = () => {
     let blockSelected = document.querySelectorAll(".main");
     blockSelected.forEach((block) => {
