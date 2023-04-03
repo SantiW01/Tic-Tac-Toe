@@ -13,12 +13,12 @@ const Game = (() => {
     ["1", "4", "7"],
     ["2", "5", "8"],
   ];
-  const clickBlock = (e) => {
+  const clickBlock = (player1, player2, e) => {
     const block = e.target;
-    changeTurn(block);
+    changeTurn(player1, player2, block);
   };
 
-  const changeTurn = (block) => {
+  const changeTurn = (player1, player2, block) => {
     if (playerTurn) {
       const player1Turn = document.createElement("p");
       player1Turn.textContent = "X";
@@ -27,7 +27,7 @@ const Game = (() => {
         block.appendChild(player1Turn);
         player1Moves.push(getDataValue(block));
         if (combinationCompare(player1Moves, winningCombination)) {
-          ClaimWinner(player1Moves);
+          ClaimWinner(player1);
         }
         playerTurn = false;
       }
@@ -38,8 +38,8 @@ const Game = (() => {
       if (!block.hasChildNodes()) {
         block.appendChild(player2Turn);
         player2Moves.push(getDataValue(block));
-        if (combinationCompare(player1Moves, winningCombination)) {
-          ClaimWinner(player2Moves);
+        if (combinationCompare(player2Moves, winningCombination)) {
+          ClaimWinner(player2);
         }
 
         playerTurn = true;
@@ -63,6 +63,9 @@ const Game = (() => {
   };
 
   const ClaimWinner = (winner) => {
+    playerTurn
+      ? CongratulateWinner(winner.player1Name)
+      : CongratulateWinner(winner.player2Name);
     blockSelected.forEach((block) => {
       if (!block.hasChildNodes()) {
         block.setAttribute("class", "block-notSelected");
@@ -70,14 +73,30 @@ const Game = (() => {
     });
   };
 
-  const play = () => {
+  const CongratulateWinner = (winnerName) => {
+    const h1 = document.createElement("h1");
+    h1.textContent = `Winner: ${winnerName}`;
+    h1.setAttribute("class", "winner");
+    document.querySelector("main").replaceChildren(h1);
+  };
+
+  const play = (player1, player2) => {
     blockSelected.forEach((block, i) => {
       block.setAttribute("data-blockValue", i);
-      block.addEventListener("click", (e) => clickBlock(e));
+      block.addEventListener("click", (e) => clickBlock(player1, player2, e));
     });
   };
 
   return { play };
 })();
 
-Game.play();
+const player = (player1Name, player2Name) => {
+  player1Name = document.querySelector(".input_player1").value;
+  player2Name = document.querySelector(".input_player2").value;
+  return { player1Name, player2Name };
+};
+document.querySelector(".start_game").addEventListener("click", (e) => {
+  const player1 = player();
+  const player2 = player();
+  Game.play(player1, player2);
+});
