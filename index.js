@@ -77,7 +77,7 @@ const Game = (() => {
     const h1 = document.createElement("h1");
     h1.textContent = `Winner: ${winnerName}`;
     h1.setAttribute("class", "winner");
-    document.querySelector("main").replaceChildren(h1);
+    document.querySelector("header").replaceChildren(h1);
   };
 
   const play = (player1, player2) => {
