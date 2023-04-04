@@ -43,3 +43,22 @@ div {
 .player2 {
   color: #f1f;
 }
+
+.block-notSelected {
+  pointer-events: none;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type="button"] {
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 5%;
+  background-color: aquamarine;
+}
