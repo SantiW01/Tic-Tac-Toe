@@ -27,3 +27,19 @@ div {
   width: 100px;
   border: 1px solid #000;
 }
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.player1 {
+  color: #1f1;
+}
+
+.player2 {
+  color: #f1f;
+}
